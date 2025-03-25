@@ -61,7 +61,7 @@ export default function Role() {
 						size="small"
 						disabled={!hasAuth("update")}
 						onClick={async () => {
-							/* 请求角色菜单权限 */
+							/* Request Role Menu Permissions */
 							const responseData = await fetchMenuByRoleId({ id: record.id });
 							setIsOpen(true);
 							setTitle(t("system.role.editRole"));
