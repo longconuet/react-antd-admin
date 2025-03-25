@@ -1,0 +1,50 @@
+name: Build and Deploy
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - name: spa-github-index-page 📒
+        run: pnpm run spa-github-index-page
+
+      - name: Install and Build 🔧
+        run: |
+          pnpm install -r
+          pnpm run build && pnpm --filter docs run docs:build
+
+      - name: spa-github-404-page 🔷
+        run: pnpm run spa-github-404-page
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
+          clean: true
+
+      - name: Deploy Docs 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          clean: true
+          folder: docs/.vitepress/dist
+          target-folder: docs
