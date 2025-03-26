@@ -21,12 +21,12 @@ export async function refreshTokenAndRetry(request: Request, options: Options, r
 	if (!isRefreshing) {
 		isRefreshing = true;
 		try {
-			// 调用 fetchRefreshToken 函数，使用传入的 refreshToken 获取新的 token 和 refreshToken
+			// Call the fetchRefreshToken function and use the passed refreshToken to get the new token and refreshToken
 			const freshResponse = await fetchRefreshToken({ refreshToken });
 			// 从响应中提取新的 token
-			const newToken = freshResponse.result.token;
+			const newToken = freshResponse.token;
 			// 从响应中提取新的 refreshToken
-			const newRefreshToken = freshResponse.result.refreshToken;
+			const newRefreshToken = freshResponse.refreshToken;
 			// 将新的 token 和 refreshToken 保存到 userStore 中
 			useAuthStore.setState({ token: newToken, refreshToken: newRefreshToken });
 			// 调用 onRefreshed 函数，传入新的 token

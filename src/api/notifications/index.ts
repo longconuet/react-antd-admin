@@ -4,5 +4,5 @@ import { request } from "#src/utils";
 export function fetchNotifications() {
 	return request
 		.get("notifications")
-		.json<ApiResponse<NotificationItem[]>>();
+		.json<NotificationItem[]>();
 }

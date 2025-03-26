@@ -1,6 +1,6 @@
 /**
- * 接口返回数据格式
- * data: 接口返回数据
+ * The interface returns data format
+ * data: The interface returns data
  */
 interface ApiResponse<T> {
 	code: number
@@ -10,8 +10,8 @@ interface ApiResponse<T> {
 }
 
 /**
- * 数组形式的接口返回数据格式
- * list: 接口返回数据
+ * The interface in array form returns data format
+ * list: The interface returns data
  */
 interface ApiListResponse<T> extends ApiResponse<T> {
 	result: {
@@ -22,12 +22,19 @@ interface ApiListResponse<T> extends ApiResponse<T> {
 }
 
 /**
- * 拉取表格请求参数
+ * Pull table request parameters
  */
 interface ApiTableRequest extends Record<string, any> {
 	cqs?: string
 	pageSize?: number
 	current?: number
+}
+
+interface PaginatedResponse<T> {
+	pageNumber: number
+	pageSize: number
+	totalCount: number
+	data: T[]
 }
 
 type Recordable<T = any> = Record<string, T>;

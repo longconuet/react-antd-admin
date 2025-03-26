@@ -42,7 +42,7 @@ export const usePermissionStore = create<PermissionState & PermissionAction>(set
 
 	/* 发送请求获取动态路由 */
 	handleAsyncRoutes: async () => {
-		const { result } = await fetchAsyncRoutes();
+		const result = await fetchAsyncRoutes();
 		// 为动态路由添加前端组件
 		const newState = processApplicationRouting(result ?? []);
 		set(() => newState);

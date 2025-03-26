@@ -11,7 +11,7 @@ export default function LayoutFooter({ className }: LayoutFooterProps) {
 				className,
 			)}
 		>
-			Copyright &copy; 2023 Condor Hero All right reserved
+			Copyright &copy; 2025 IIG Viet Nam All right reserved
 		</footer>
 	);
 }

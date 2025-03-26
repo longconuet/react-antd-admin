@@ -14,21 +14,21 @@ import { useStyles } from "./styles";
 
 export interface BasicTableProps<D, U, V> extends ProTableProps<D, U, V> {
 	/**
-	 * @description 是否填充父元素
+	 * @description Whether to fill the parent element
 	 * @default true
 	 */
 	autoHeight?: boolean
 	/**
-	 * @description 表格底部的偏移量
+	 * @description Offset at the bottom of the table
 	 * @default 0
 	 */
 	offsetBottom?: number
 }
 
 /**
- * 当表格始终处于屏幕内时，表格高度是自适应的
- * 如果表格在屏幕内可能不可见或者不位于 main 布局标签内，请设置 autoHeight 为 false，避免表格出现抖动，参考下面的 warning 部分
- */
+* When the table is always in the screen, the table height is adaptive
+* If the table may not be visible on the screen or is not located in the main layout label, please set autoHeight to false to avoid jitter in the table. Refer to the warning section below
+*/
 export function BasicTable<
 	DataType extends Record<string, any>,
 	Params extends ParamsType = ParamsType,
@@ -44,10 +44,10 @@ export function BasicTable<
 	const [scrollY, setScrollY] = useState(autoHeight ? 0 : undefined);
 
 	/**
-	 * @description 表格高度自适应
-	 * 这是一个 hook 方法，等待 antd 修复
-	 * @see https://github.com/ant-design/ant-design/issues/23974
-	 */
+	* @description Tables are highly adaptive
+	* This is a hook method, waiting for antd to fix
+	* @see https://github.com/ant-design/ant-design/issues/23974
+	*/
 	useEffect(() => {
 		const isPaginationDisabled = props.pagination === false;
 		if (autoHeight && tableWrapperRef.current && size?.height) {
@@ -59,7 +59,7 @@ export function BasicTable<
 
 			const tableWrapperRect = tableWrapperRef.current.getBoundingClientRect();
 
-			// 如果表格超出屏幕高度，不进行高度自适应
+			// If the table exceeds the screen height, no height adaptation is performed
 			if (tableWrapperRect.top > window.innerHeight) {
 				setScrollY(undefined);
 				return;
@@ -70,19 +70,19 @@ export function BasicTable<
 			if (!tableBody)
 				return;
 
-			// 获取元素的边界框
+			// Get the bounding box of the element
 			const tableBodyRect = tableBody.getBoundingClientRect();
-			// 表格表头的高度
+			// The height of the table header
 			const tableHeaderHeight = tableBodyRect.top - tableWrapperRect.top;
 			/**
-			 * 表格分页的高度
+			 * The height of the table pagination
 			 *
-			 * @warning 表格必须是 main 标签的子元素，因为 main 标签的 padding-bottom(16) 会影响表格的高度
-			 * pagination 的高度 24，上边距 16，main 标签的 padding-bottom 16
+			 * @warning The table must be a child element of the main tag, because the padding-bottom(16) of the main tag will affect the height of the table.
+			 * height of pagination 24, upper margin 16, padding-bottom 16 of main tag
 			 *
-			 * 无法通过获取分页器 DOM 来计算分页器距离屏幕底部高度的原因：
-			 * 1. 分页器的 DOM 可能是 undefined，可能因为分页器是在表格渲染完成后才会渲染
-			 * 2. 没有设置 table body 的高度，无法确保分页器位于正确的位置，导致高度计算不准确
+			 * Unable to get the pager DOM To calculate the height of the pager from the bottom of the screen:
+			 * 1. The DOM of the paginator may be undefined, but it may be because the paginator will render after the table rendering is completed.
+			 * 2. The height of the table body is not set, and it is impossible to ensure that the pager is in the correct position, resulting in inaccurate height calculations
 			 *
 			 */
 			const paginationHeight = isPaginationDisabled ? 16 : 24 + 16 + 16;
@@ -137,7 +137,7 @@ export function BasicTable<
 				}}
 				rootClassName={cn(BASIC_TABLE_ROOT_CLASS_NAME, props.rootClassName)}
 				className={cn(classes.basicTable, props.className)}
-				// 设置 y 为 0，保证 tableBodyRect.height 小于 bodyHeight
+				// Set y to 0 to ensure that tableBodyRect.height is less than bodyHeight
 				scroll={{ y: scrollY, ...props.scroll }}
 				loading={getLoadingProps()}
 				pagination={getPaginationProps()}

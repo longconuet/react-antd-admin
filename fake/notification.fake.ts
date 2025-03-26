@@ -7,7 +7,7 @@ export default defineFakeRoute([
 		url: "/notifications",
 		timeout: 1000,
 		method: "get",
-		response: () => resultSuccess([
+		response: () => ([
 			{
 				avatar: "https://avatar.vercel.sh/vercel.svg?text=VC",
 				date: "3 小时前",

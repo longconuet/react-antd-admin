@@ -7,12 +7,12 @@
 		"assignMenu": "Assign Menu"
 	},
 	"position": {
-		"name": "Name",
+		"name": "Tên",
 		"id": "Id",
-		"code": "Code",
-		"description": "Description",
-		"addPosition": "Add Position",
-		"editPosition": "Edit Position"
+		"code": "Mã",
+		"description": "Mô tả",
+		"addPosition": "Thêm vị trí",
+		"editPosition": "Sửa vị trí"
 	},
 	"user": {
 		"name": "User Name",

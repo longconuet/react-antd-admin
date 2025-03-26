@@ -23,7 +23,7 @@ export interface TanstackQueryProps {
 export function TanstackQuery({ children }: TanstackQueryProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<ReactQueryDevtools initialIsOpen={false} />
+			{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 			{children}
 		</QueryClientProvider>
 	);

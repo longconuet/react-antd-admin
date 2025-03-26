@@ -28,6 +28,15 @@ export function getEnUsLang() {
 	return result;
 }
 
+export function getviVNLang() {
+	const langFiles = import.meta.glob<LanguageFileMap>("./vi-VN/**/*.json", {
+		import: "default",
+		eager: true,
+	});
+	const result = organizeLanguageFiles(langFiles);
+	return result;
+}
+
 export function organizeLanguageFiles(files: LanguageFileMap) {
 	const result: LanguageModule<LanguageFileMap> = {};
 

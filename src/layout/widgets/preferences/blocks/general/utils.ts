@@ -5,11 +5,11 @@ export const getLanguageItems: () => any = (
 ) => {
 	return [
 		{
-			label: "简体中文",
+			label: "Tiếng Việt",
 			// Menu
-			key: "zh-CN",
+			key: "vi-VN",
 			// Select
-			value: "zh-CN",
+			value: "vi-VN",
 		},
 		{
 			label: "English",
@@ -17,6 +17,13 @@ export const getLanguageItems: () => any = (
 			key: "en-US",
 			// Select
 			value: "en-US",
+		},
+		{
+			label: "简体中文",
+			// Menu
+			key: "zh-CN",
+			// Select
+			value: "zh-CN",
 		},
 	];
 };

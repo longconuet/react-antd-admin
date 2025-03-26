@@ -6,7 +6,7 @@ import { request } from "#src/utils";
 export function fetchLogin(data: PasswordLoginFormType) {
 	return request
 		.post("login", { json: data })
-		.json<ApiResponse<AuthType>>();
+		.json<AuthType>();
 }
 
 export function fetchLogout() {
@@ -14,11 +14,11 @@ export function fetchLogout() {
 }
 
 export function fetchAsyncRoutes() {
-	return request.get("get-async-routes").json<ApiResponse<AppRouteRecordRaw[]>>();
+	return request.get("get-async-routes").json<AppRouteRecordRaw[]>();
 }
 
 export function fetchUserInfo() {
-	return request.get("user-info").json<ApiResponse<UserInfoType>>();
+	return request.get("user-info").json<UserInfoType>();
 }
 
 export interface RefreshTokenResult {
@@ -28,5 +28,5 @@ export interface RefreshTokenResult {
 
 export const refreshTokenPath = "refresh-token";
 export function fetchRefreshToken(data: { readonly refreshToken: string }) {
-	return request.post(refreshTokenPath, { json: data }).json<ApiResponse<RefreshTokenResult>>();
+	return request.post(refreshTokenPath, { json: data }).json<RefreshTokenResult>();
 }

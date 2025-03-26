@@ -14,13 +14,13 @@ export default defineFakeRoute([
 		// response: () => ({ code: 404, message: "Not found" }),
 		response: ({ body }) => {
 			if (body.username !== "commom") {
-				return resultSuccess({
+				return ({
 					token: ADMIN_TOKEN,
 					refreshToken: ADMIN_REFRESH_TOKEN,
 				});
 			}
 			else {
-				return resultSuccess({
+				return ({
 					token: COMMON_TOKEN,
 					refreshToken: COMMON_REFRESH_TOKEN,
 				});
@@ -39,9 +39,9 @@ export default defineFakeRoute([
 		method: "post",
 		response: ({ body }) => {
 			if (body.refreshToken === ADMIN_REFRESH_TOKEN) {
-				return resultSuccess({ token: ADMIN_TOKEN, refreshToken: ADMIN_REFRESH_TOKEN });
+				return ({ token: ADMIN_TOKEN, refreshToken: ADMIN_REFRESH_TOKEN });
 			}
-			return resultSuccess({ token: COMMON_TOKEN, refreshToken: COMMON_REFRESH_TOKEN });
+			return ({ token: COMMON_TOKEN, refreshToken: COMMON_REFRESH_TOKEN });
 		},
 	},
 	{
@@ -49,7 +49,7 @@ export default defineFakeRoute([
 		timeout: 1000,
 		method: "get",
 		response: () => {
-			return resultSuccess(COUNTRIES_CODE);
+			return (COUNTRIES_CODE);
 		},
 	},
 ]);

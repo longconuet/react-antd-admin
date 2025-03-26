@@ -1,38 +1,72 @@
+import { s } from "#node_modules/motion/dist/react-client";
 import { isObject, message } from "#src/utils";
 
+interface ValidationError {
+	propertyName: string
+	errorMessage: string
+	attemptedValue: string
+	customState: null | any
+	severity: number
+	errorCode: string
+	formattedMessagePlaceholderValues: Record<string, string>
+}
+
+interface ApiErrorResponse {
+	title: string
+	status: number
+	detail: string
+	instance: string
+	traceId: string
+	ValidationErrors: ValidationError[]
+}
+
 /**
- * 处理错误响应
+ * Handle error response
  *
- * @param response 响应对象
- * @returns 响应对象
+ * @param response Response object
+ * @returns Response object
  */
 export async function handleErrorResponse(response: Response) {
+	let errMsg = 'An unexpected error occurred';
 	try {
-		// 将响应内容解析为 JSON 格式
-		const data = await response.json();
-
-		// 判断解析后的数据是否为对象类型
-		if (isObject(data)) {
-			// 将解析后的数据转换为包含错误信息的对象类型
-			const json = data as { errorMsg?: string, message?: string };
-
-			// 如果解析后的数据中包含 errorMsg 或 message 属性，则显示错误信息
-			// 否则显示响应的状态文本作为错误信息
-			message.error(json.errorMsg || json.message || response.statusText);
+		switch (response.status) {
+			case 400: {
+				const data = await response.json() as ApiErrorResponse;
+				if (data.ValidationErrors?.length > 0) {
+					errMsg = data.ValidationErrors.map(
+						(err) => `- ${err.propertyName}: ${err.errorMessage}`
+					).join("\n");
+				} else {
+					errMsg = "Bad Request: Invalid input data";
+				}
+				break;
+			}
+			case 404: {
+				const data = await response.json() as ApiErrorResponse;
+				errMsg = data.detail || "Not found: Resource does not exist";
+				break;
+			}
+			case 403:
+				errMsg = "Forbidden: You do not have permission";
+				break;
+			case 500:
+				errMsg = "Server error: Please try again later";
+				break;
+			default:
+				errMsg = `Error ${response.status}: Something went wrong`;
+				break;
 		}
-		else {
-			// 如果解析后的数据不是对象类型，则直接显示响应的状态文本作为错误信息
-			message.error(response.statusText);
-		}
+
+		message.error(errMsg);
 	}
 	catch (e) {
-		// 如果解析 JSON 格式出错，则打印错误信息到控制台
-		console.error("Error parsing JSON:", e);
-
-		// 显示响应的状态文本作为错误信息
-		message.error(response.statusText);
+		// Display the status text of the response as an error message
+		if (response.status === 404) {
+			errMsg = "Not found: Resource does not exist";
+		}
+		message.error(response.statusText || errMsg);
 	}
 
-	// 返回响应对象
+	// Return the response object
 	return response;
 }

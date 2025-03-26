@@ -43,6 +43,19 @@ export const systemManagementRouter = {
 			},
 		},
 		{
+			path: "/system/position",
+			handle: {
+				icon: "TeamOutlined",
+				title: "common.menu.position",
+				roles: ["admin"],
+				permissions: [
+					"permission:button:add",
+					"permission:button:update",
+					"permission:button:delete",
+				],
+			},
+		},
+		{
 			path: "/system/menu",
 			handle: {
 				icon: "MenuOutlined",
@@ -218,14 +231,13 @@ export default defineFakeRoute([
 	{
 		url: "/get-async-routes",
 		method: "get",
-		response: () => resultSuccess(
+		response: () =>
 			[
 				systemManagementRouter,
 				// systemMonitorRouter,
 				// permissionRouter,
 				// frameRouter,
 				// tabsRouter,
-			],
-		),
+			]
 	},
 ]);

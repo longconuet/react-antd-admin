@@ -2,6 +2,7 @@ import type { InitOptions } from "i18next";
 
 import enUS from "antd/locale/en_US";
 import zhCN from "antd/locale/zh_CN";
+import viVN from "antd/locale/vi_VN";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -9,11 +10,12 @@ import { getEnUsLang, getZhCnLang } from "./helper";
 
 export * from "./t";
 
-export type LanguageType = "zh-CN" | "en-US";
+export type LanguageType = "zh-CN" | "en-US" | "vi-VN";
 
 export const ANT_DESIGN_LOCALE = {
 	"zh-CN": zhCN,
 	"en-US": enUS,
+	"vi-VN": viVN
 };
 
 export const i18nResources = {
