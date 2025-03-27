@@ -58,6 +58,12 @@ const systemMenu = [
 		menuType: 0,
 		name: "common.menu.position",
 	},
+	{
+		parentId: system,
+		id: system + 6,
+		menuType: 0,
+		name: "common.menu.department",
+	},
 ];
 
 export default defineFakeRoute([

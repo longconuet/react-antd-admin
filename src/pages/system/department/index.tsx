@@ -1,6 +1,6 @@
-import type { PositionItemType } from "#src/api/system";
+import type { DepartmentItemType } from "#src/api/system";
 import type { ActionType, ProColumns, ProCoreActionType } from "@ant-design/pro-components";
-import { fetchDeletePositionItem, fetchPositionList } from "#src/api/system";
+import { fetchDeleteDepartmentItem, fetchDepartmentList } from "#src/api/system";
 import { BasicButton, BasicContent, BasicTable } from "#src/components";
 import { useAuth } from "#src/hooks";
 
@@ -13,26 +13,26 @@ import { useTranslation } from "react-i18next";
 import { Detail } from "./components/detail";
 import { getConstantColumns } from "./constants";
 
-export default function Position() {
+export default function Department() {
 	const { t } = useTranslation();
 	const hasAuth = useAuth();
-	const deletePositionItemMutation = useMutation({
-		mutationFn: (id: number) => fetchDeletePositionItem(id),
+	const deleteDepartmentItemMutation = useMutation({
+		mutationFn: (id: number) => fetchDeleteDepartmentItem(id),
 	});
 	/* Detail Data */
 	const [isOpen, setIsOpen] = useState(false);
 	const [title, setTitle] = useState("");
-	const [detailData, setDetailData] = useState<Partial<PositionItemType>>({});
+	const [detailData, setDetailData] = useState<Partial<DepartmentItemType>>({});
 
 	const actionRef = useRef<ActionType>(null);
 
 	const handleDeleteRow = async (id: number, action?: ProCoreActionType<object>) => {
-		await deletePositionItemMutation.mutateAsync(id);
+		await deleteDepartmentItemMutation.mutateAsync(id);
 		await action?.reload?.();
 		window.$message?.success(`${t("common.deleteSuccess")}`);
 	};
 
-	const columns: ProColumns<PositionItemType>[] = [
+	const columns: ProColumns<DepartmentItemType>[] = [
 		...getConstantColumns(t),
 		{
 			title: t("common.action"),
@@ -49,7 +49,7 @@ export default function Position() {
 						// disabled={!hasAuth("update")}
 						onClick={async () => {
 							setIsOpen(true);
-							setTitle(t("system.position.editPosition"));
+							setTitle(t("system.department.editDepartment"));
 							setDetailData(record);
 						}}
 					>
@@ -65,6 +65,7 @@ export default function Position() {
 						<BasicButton
 							type="link"
 							size="small"
+							className="text-red-500"
 						// disabled={!hasAuth("delete")}
 						>{t("common.delete")}</BasicButton>
 					</Popconfirm>,
@@ -83,12 +84,12 @@ export default function Position() {
 	};
 	return (
 		<BasicContent className="h-full">
-			<BasicTable<PositionItemType>
+			<BasicTable<DepartmentItemType>
 				columns={columns}
 				actionRef={actionRef}
 				request={async (params) => {
 					// console.log(sort, filter);
-					const responseData = await fetchPositionList({
+					const responseData = await fetchDepartmentList({
 						pageNumber: params.current,
 						pageSize: params.pageSize,
 						searchName: params.name || "",
@@ -100,16 +101,16 @@ export default function Position() {
 						total: responseData.totalCount,
 					};
 				}}
-				headerTitle={`${t("common.menu.position")}`}
+				headerTitle={`${t("common.menu.department")}`}
 				toolBarRender={() => [
 					<Button
-						key="add-position"
+						key="add-department"
 						icon={<PlusCircleOutlined />}
 						type="primary"
 						disabled={!hasAuth("add")}
 						onClick={() => {
 							setIsOpen(true);
-							setTitle(t("system.position.addPosition"));
+							setTitle(t("system.department.addDepartment"));
 						}}
 					>
 						{t("common.add")}

@@ -34,8 +34,8 @@ export async function handleErrorResponse(response: Response) {
 				const data = await response.json() as ApiErrorResponse;
 				if (data.ValidationErrors?.length > 0) {
 					errMsg = data.ValidationErrors.map(
-						(err) => `- ${err.propertyName}: ${err.errorMessage}`
-					).join("\n");
+						(err) => `${err.errorMessage}`
+					).join(".\n");
 				} else {
 					errMsg = "Bad Request: Invalid input data";
 				}

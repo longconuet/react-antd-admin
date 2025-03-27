@@ -1,8 +1,8 @@
-import type { PositionItemType } from "#src/api/system";
+import type { DepartmentItemType } from "#src/api/system";
 import type { ProColumns } from "@ant-design/pro-components";
 import type { TFunction } from "i18next";
 
-export function getConstantColumns(t: TFunction<"translation", undefined>): ProColumns<PositionItemType>[] {
+export function getConstantColumns(t: TFunction<"translation", undefined>): ProColumns<DepartmentItemType>[] {
 	return [
 		{
 			dataIndex: "index",
@@ -11,7 +11,7 @@ export function getConstantColumns(t: TFunction<"translation", undefined>): ProC
 			width: 50,
 		},
 		{
-			title: t("system.position.name"),
+			title: t("system.department.name"),
 			dataIndex: "name",
 			disable: true,
 			ellipsis: false,
@@ -29,7 +29,7 @@ export function getConstantColumns(t: TFunction<"translation", undefined>): ProC
 		},
 		{
 			disable: true,
-			title: t("system.position.code"),
+			title: t("system.department.code"),
 			dataIndex: "code",
 			width: 120,
 			filters: true,
@@ -45,8 +45,14 @@ export function getConstantColumns(t: TFunction<"translation", undefined>): ProC
 			},
 		},
 		{
-			title: t("system.position.description"),
+			title: t("system.department.description"),
 			dataIndex: "description",
+			width: 120,
+			search: false,
+		},
+		{
+			title: t("system.department.manager"),
+			dataIndex: "managerId",
 			width: 120,
 			search: false,
 		}

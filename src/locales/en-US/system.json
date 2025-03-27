@@ -14,6 +14,15 @@
 		"addPosition": "Add Position",
 		"editPosition": "Edit Position"
 	},
+	"department": {
+		"name": "Name",
+		"id": "Id",
+		"code": "Code",
+		"description": "Description",
+		"manager": "Manager",
+		"addDepartment": "Add Department",
+		"editDepartment": "Edit Department"
+	},
 	"user": {
 		"name": "User Name",
 		"id": "User Id",

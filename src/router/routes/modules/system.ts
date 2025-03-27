@@ -9,6 +9,7 @@ const Dept = lazy(() => import("#src/pages/system/dept"));
 const Role = lazy(() => import("#src/pages/system/role"));
 const Menu = lazy(() => import("#src/pages/system/menu"));
 const Position = lazy(() => import("#src/pages/system/position"));
+const Department = lazy(() => import("#src/pages/system/department"));
 
 const routes: AppRouteRecordRaw[] = [
 	{
@@ -54,6 +55,20 @@ const routes: AppRouteRecordRaw[] = [
 				handle: {
 					icon: "TeamOutlined",
 					title: "common.menu.position",
+					roles: ["admin"],
+					permissions: [
+						"permission:button:add",
+						"permission:button:update",
+						"permission:button:delete",
+					],
+				},
+			},
+			{
+				path: "/system/department",
+				Component: Department,
+				handle: {
+					icon: "TeamOutlined",
+					title: "common.menu.department",
 					roles: ["admin"],
 					permissions: [
 						"permission:button:add",
