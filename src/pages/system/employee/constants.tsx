@@ -1,8 +1,12 @@
-import type { EmployeeItemType } from "#src/api/system";
+import type { EmployeeItemType, SimpleDepartmentItemType, SimplePositionItemType } from "#src/api/system";
 import type { ProColumns } from "@ant-design/pro-components";
 import type { TFunction } from "i18next";
 
-export function getConstantColumns(t: TFunction<"translation", undefined>): ProColumns<EmployeeItemType>[] {
+export function getConstantColumns(
+	t: TFunction<"translation", undefined>,
+	departmentItems: SimpleDepartmentItemType[],
+	positionItems: SimplePositionItemType[]
+): ProColumns<EmployeeItemType>[] {
 	return [
 		{
 			dataIndex: "index",
@@ -81,16 +85,24 @@ export function getConstantColumns(t: TFunction<"translation", undefined>): ProC
 		{
 			disable: true,
 			title: t("system.employee.department"),
-			dataIndex: "departmentName",
+			dataIndex: "departmentId",
 			width: 120,
-			search: false,
+			valueType: "select",
+			valueEnum: departmentItems.reduce((acc, cur) => {
+				acc[cur.id] = { text: cur.name };
+				return acc;
+			}, {} as Record<string, { text: string }>),
 		},
 		{
 			disable: true,
 			title: t("system.employee.position"),
-			dataIndex: "positionName",
+			dataIndex: "positionId",
 			width: 120,
-			search: false,
+			valueType: "select",
+			valueEnum: positionItems.reduce((acc, cur) => {
+				acc[cur.id] = { text: cur.name };
+				return acc;
+			}, {} as Record<string, { text: string }>),
 		}
 	];
 }

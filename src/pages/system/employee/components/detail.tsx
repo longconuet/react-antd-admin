@@ -1,4 +1,4 @@
-import type { EmployeeItemType, SimpleDepartmentItemType } from "#src/api/system";
+import type { EmployeeItemType, SimpleDepartmentItemType, SimplePositionItemType } from "#src/api/system";
 import { fetchAddEmployeeItem, fetchUpdateEmployeeItem } from "#src/api/system";
 
 import {
@@ -16,17 +16,22 @@ interface DetailProps {
 	open: boolean
 	detailData: Partial<EmployeeItemType>
 	departmentItems: SimpleDepartmentItemType[]
+	positionItems: SimplePositionItemType[]
 	onCloseChange: () => void
 	refreshTable?: () => void
 }
 
-export function Detail({ title, open, onCloseChange, detailData, departmentItems, refreshTable }: DetailProps) {
+export function Detail({ title, open, onCloseChange, detailData, departmentItems, positionItems, refreshTable }: DetailProps) {
 	const { t } = useTranslation();
 	const [form] = Form.useForm<EmployeeItemType>();
 
 	const departmentOptions = departmentItems.map((dept) => ({
 		value: dept.id,
 		label: dept.name,
+	}));
+	const positionOptions = positionItems.map((pos) => ({
+		value: pos.id,
+		label: pos.name,
 	}));
 
 	const addEmployeeItemMutation = useMutation({
@@ -101,6 +106,10 @@ export function Detail({ title, open, onCloseChange, detailData, departmentItems
 					{
 						required: true,
 					},
+					{
+						max: 50,
+						message: t("validation.maxLength", { length: 50 }),
+					}
 				]}
 				width="md"
 				name="firstName"
@@ -114,6 +123,10 @@ export function Detail({ title, open, onCloseChange, detailData, departmentItems
 					{
 						required: true,
 					},
+					{
+						max: 50,
+						message: t("validation.maxLength", { length: 50 }),
+					}
 				]}
 				width="md"
 				name="lastName"
@@ -127,11 +140,16 @@ export function Detail({ title, open, onCloseChange, detailData, departmentItems
 					{
 						required: true,
 					},
+					{
+						max: 50,
+						message: t("validation.maxLength", { length: 50 }),
+					}
 				]}
 				width="md"
 				name="username"
 				disabled={!!detailData.id}
 				label={t("system.employee.username")}
+				tooltip={t("form.length", { length: 50 })}
 			/>
 
 			<ProFormText
@@ -140,6 +158,10 @@ export function Detail({ title, open, onCloseChange, detailData, departmentItems
 					{
 						required: true,
 					},
+					{
+						type: "email",
+						message: t("validation.invalidEmail"),
+					}
 				]}
 				width="md"
 				name="email"
@@ -164,6 +186,17 @@ export function Detail({ title, open, onCloseChange, detailData, departmentItems
 				label={t("system.employee.department")}
 				rules={[{ required: true }]}
 				options={departmentOptions}
+				fieldProps={{
+					showSearch: true, // Bật tìm kiếm trong Select
+					optionFilterProp: 'label', // Tìm kiếm dựa trên label
+				}}
+			/>
+
+			<ProFormSelect
+				name="positionId"
+				label={t("system.employee.position")}
+				rules={[{ required: true }]}
+				options={positionOptions}
 				fieldProps={{
 					showSearch: true, // Bật tìm kiếm trong Select
 					optionFilterProp: 'label', // Tìm kiếm dựa trên label

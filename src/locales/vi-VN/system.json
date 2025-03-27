@@ -1,10 +1,10 @@
 {
 	"role": {
-		"name": "Role Name",
-		"id": "Role Id",
-		"addRole": "Add Role",
-		"editRole": "Edit Role",
-		"assignMenu": "Assign Menu"
+		"name": "Tên vai trò",
+		"id": "Id vai trò",
+		"addRole": "Thêm vai trò",
+		"editRole": "Sửa vai trò",
+		"assignMenu": "Gán menu"
 	},
 	"position": {
 		"name": "Tên",
@@ -14,37 +14,63 @@
 		"addPosition": "Thêm vị trí",
 		"editPosition": "Sửa vị trí"
 	},
+	"department": {
+		"name": "Tên phòng ban",
+		"id": "Id phòng ban",
+		"code": "Mã phòng ban",
+		"description": "Mô tả",
+		"manager": "Quản lý",
+		"addDepartment": "Thêm phòng ban",
+		"editDepartment": "Sửa phòng ban"
+	},
+	"employee": {
+		"name": "Tên nhân viên",
+		"firstName": "Họ",
+		"lastName": "Tên",
+		"id": "Id nhân viên",
+		"code": "Mã nhân viên",
+		"username": "Tên đăng nhập",
+		"email": "Email",
+		"phoneNumber": "Số điện thoại",
+		"department": "Phòng ban",
+		"position": "Vị trí",
+		"role": "Vai trò",
+		"description": "Mô tả",
+		"manager": "Quản lý",
+		"addEmployee": "Thêm nhân viên",
+		"editEmployee": "Sửa nhân viên"
+	},
 	"user": {
-		"name": "User Name",
-		"id": "User Id",
-		"addUser": "Add User",
-		"editUser": "Edit User"
+		"name": "Tên người dùng",
+		"id": "Id người dùng",
+		"addUser": "Thêm người dùng",
+		"editUser": "Sửa người dùng"
 	},
 	"menu": {
-		"name": "Menu Name",
-		"routePath": "Route Path",
-		"addMenu": "Add Menu",
-		"editMenu": "Edit Menu",
-		"menuType": "Menu Type",
-		"menuTypeDesc": "Menu Type Description 0: Menu, 1: Iframe, 2: External Link, 3: Button",
+		"name": "Tên menu",
+		"routePath": "Đường dẫn",
+		"addMenu": "Thêm menu",
+		"editMenu": "Sửa menu",
+		"menuType": "Loại menu",
+		"menuTypeDesc": "Mô tả loại menu 0: Menu, 1: Iframe, 2: Liên kết ngoài, 3: Nút",
 		"menu": "Menu",
 		"iframe": "Iframe",
-		"externalLink": "External Link",
-		"button": "Button",
-		"menuOrder": "Menu Order",
-		"menuIcon": "Menu Icon",
-		"componentUrl": "Component Url",
-		"keepAlive": "Cache Page",
-		"hideInMenu": "Hide in Menu",
-		"currentActiveMenu": "Active Path",
-		"iframeLink": "Iframe Link",
-		"externalLinkUrl": "External Link URL",
-		"parentMenu": "Parent Menu"
+		"externalLink": "Liên kết ngoài",
+		"button": "Nút",
+		"menuOrder": "Thứ tự menu",
+		"menuIcon": "Biểu tượng menu",
+		"componentUrl": "Đường dẫn component",
+		"keepAlive": "Lưu cache trang",
+		"hideInMenu": "Ẩn trong menu",
+		"currentActiveMenu": "Đường dẫn đang hoạt động",
+		"iframeLink": "Liên kết iframe",
+		"externalLinkUrl": "URL liên kết ngoài",
+		"parentMenu": "Menu cha"
 	},
 	"dept": {
-		"name": "Department Name",
-		"id": "Department Id",
-		"addDept": "Add Department",
-		"editDept": "Edit Department"
+		"name": "Tên phòng ban",
+		"id": "Id phòng ban",
+		"addDept": "Thêm phòng ban",
+		"editDept": "Sửa phòng ban"
 	}
 }

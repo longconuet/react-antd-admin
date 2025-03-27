@@ -6,7 +6,7 @@ import viVN from "antd/locale/vi_VN";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-import { getEnUsLang, getZhCnLang } from "./helper";
+import { getEnUsLang, getZhCnLang, getviVNLang } from "./helper";
 
 export * from "./t";
 
@@ -24,6 +24,9 @@ export const i18nResources = {
 	},
 	"en-US": {
 		translation: getEnUsLang(),
+	},
+	"vi-VN": {
+		translation: getviVNLang(),
 	},
 };
 

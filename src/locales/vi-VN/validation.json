@@ -1,0 +1,10 @@
+{
+    "invalidEmail": "Email không hợp lệ",
+    "invalidPhoneNumber": "Số điện thoại không hợp lệ",
+    "maxLength": "Độ dài tối đa là {{length}}",
+    "minLength": "Độ dài tối thiểu là {{length}}",
+    "required": "Bắt buộc",
+    "invalidPassword": "Mật khẩu phải chứa ít nhất 8 ký tự, 1 chữ cái viết hoa, 1 chữ cái viết thường, 1 số và 1 ký tự đặc biệt",
+    "invalidUsername": "Tên người dùng phải chứa ít nhất 6 ký tự, 1 chữ cái viết hoa, 1 chữ cái viết thường và 1 số",
+    "invalidCode": "Mã phải chứa ít nhất 6 ký tự, 1 chữ cái viết hoa, 1 chữ cái viết thường và 1 số"
+}

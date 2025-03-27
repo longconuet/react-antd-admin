@@ -20,7 +20,7 @@ export function fetchAddEmployeeItem(data: EmployeeItemType) {
 }
 
 /* Modify employee */
-export function fetchUpdateEmployeeItem(data: Omit<EmployeeItemType, "username">) {
+export function fetchUpdateEmployeeItem(data: Omit<EmployeeItemType, "username" | "email">) {
 	return request.put("employee", { json: data, ignoreLoading: true }).json();
 }
 

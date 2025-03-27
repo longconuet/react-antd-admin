@@ -1,4 +1,4 @@
-import type { PositionItemType } from "./types";
+import type { PositionItemType, SimplePositionItemType } from "./types";
 import { request } from "#src/utils";
 
 export * from "./types";
@@ -9,9 +9,14 @@ interface PositionQueryParams {
 	pageSize?: number
 }
 
-/* Get the position list */
+/* Get the paginated position list */
 export function fetchPositionList(data: any) {
 	return request.get<PaginatedResponse<PositionItemType>>("position", { searchParams: data, ignoreLoading: true }).json();
+}
+
+/* Get all simple position list */
+export function fetchSimplePositionList() {
+	return request.get<SimplePositionItemType[]>("position/simple-list", { ignoreLoading: true }).json();
 }
 
 /* New position */

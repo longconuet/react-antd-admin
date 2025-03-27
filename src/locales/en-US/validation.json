@@ -1,0 +1,10 @@
+{
+    "invalidEmail": "Invalid email",
+    "invalidPhoneNumber": "Invalid phone number",
+    "maxLength": "Maximum length is {{length}}",
+    "minLength": "Minimum length is {{length}}",
+    "required": "Required",
+    "invalidPassword": "Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character",
+    "invalidUsername": "Username must contain at least 6 characters, 1 uppercase letter, 1 lowercase letter and 1 number",
+    "invalidCode": "Code must contain at least 6 characters, 1 uppercase letter, 1 lowercase letter and 1 number"
+}

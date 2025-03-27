@@ -1,6 +1,6 @@
 import type { EmployeeItemType } from "#src/api/system";
 import type { ActionType, ProColumns, ProCoreActionType } from "@ant-design/pro-components";
-import { fetchDeleteEmployeeItem, fetchEmployeeList, fetchSimpleDepartmentList } from "#src/api/system";
+import { fetchDeleteEmployeeItem, fetchEmployeeList, fetchSimpleDepartmentList, fetchSimplePositionList } from "#src/api/system";
 import { BasicButton, BasicContent, BasicTable } from "#src/components";
 import { useAuth } from "#src/hooks";
 
@@ -17,15 +17,20 @@ export default function Employee() {
 	const { t } = useTranslation();
 	const hasAuth = useAuth();
 
+	// Department List
 	const { data: departmentItems } = useQuery({
 		queryKey: ["employee-department-list"],
 		queryFn: async () => {
-			const responseData = await fetchSimpleDepartmentList();
-			return responseData?.map(item => ({
-				...item,
-				title: item.name,
-				key: item.id,
-			}));
+			return await fetchSimpleDepartmentList();
+		},
+		initialData: [],
+	});
+
+	// Position List
+	const { data: positionItems } = useQuery({
+		queryKey: ["employee-position-list"],
+		queryFn: async () => {
+			return await fetchSimplePositionList();
 		},
 		initialData: [],
 	});
@@ -46,8 +51,10 @@ export default function Employee() {
 		window.$message?.success(`${t("common.deleteSuccess")}`);
 	};
 
+	const constantColumns = getConstantColumns(t, departmentItems, positionItems);
+
 	const columns: ProColumns<EmployeeItemType>[] = [
-		...getConstantColumns(t),
+		...constantColumns,
 		{
 			title: t("common.action"),
 			valueType: "option",
@@ -106,8 +113,12 @@ export default function Employee() {
 					const responseData = await fetchEmployeeList({
 						pageNumber: params.current,
 						pageSize: params.pageSize,
-						searchName: params.name || "",
-						searchCode: params.code || ""
+						searchName: params.fullName || "",
+						searchUsername: params.username || "",
+						searchEmail: params.email || "",
+						searchPhone: params.phone || "",
+						searchDepartmentId: params.departmentId || "",
+						searchPositionId: params.positionId || "",
 					});
 					return {
 						...responseData,
@@ -137,6 +148,7 @@ export default function Employee() {
 				onCloseChange={onCloseChange}
 				detailData={detailData}
 				departmentItems={departmentItems}
+				positionItems={positionItems}
 				refreshTable={refreshTable}
 			/>
 		</BasicContent>
