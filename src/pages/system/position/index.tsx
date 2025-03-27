@@ -17,7 +17,7 @@ export default function Position() {
 	const { t } = useTranslation();
 	const hasAuth = useAuth();
 	const deletePositionItemMutation = useMutation({
-		mutationFn: (id: number) => fetchDeletePositionItem(id),
+		mutationFn: (id: string) => fetchDeletePositionItem(id),
 	});
 	/* Detail Data */
 	const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function Position() {
 
 	const actionRef = useRef<ActionType>(null);
 
-	const handleDeleteRow = async (id: number, action?: ProCoreActionType<object>) => {
+	const handleDeleteRow = async (id: string, action?: ProCoreActionType<object>) => {
 		await deletePositionItemMutation.mutateAsync(id);
 		await action?.reload?.();
 		window.$message?.success(`${t("common.deleteSuccess")}`);

@@ -23,6 +23,23 @@
 		"addDepartment": "Add Department",
 		"editDepartment": "Edit Department"
 	},
+	"employee": {
+		"name": "Name",
+		"firstName": "First name",
+		"lastName": "Last name",
+		"id": "Id",
+		"code": "Code",
+		"username": "Username",
+		"email": "Email",
+		"phoneNumber": "Phone number",
+		"department": "Department",
+		"position": "Position",
+		"role": "Role",
+		"description": "Description",
+		"manager": "Manager",
+		"addEmployee": "Add Employee",
+		"editEmployee": "Edit Employee"
+	},
 	"user": {
 		"name": "User Name",
 		"id": "User Id",

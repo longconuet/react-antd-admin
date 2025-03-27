@@ -56,6 +56,32 @@ export const systemManagementRouter = {
 			},
 		},
 		{
+			path: "/system/deparment",
+			handle: {
+				icon: "TeamOutlined",
+				title: "common.menu.deparment",
+				roles: ["admin"],
+				permissions: [
+					"permission:button:add",
+					"permission:button:update",
+					"permission:button:delete",
+				],
+			},
+		},
+		{
+			path: "/system/employee",
+			handle: {
+				icon: "TeamOutlined",
+				title: "common.menu.employee",
+				roles: ["admin"],
+				permissions: [
+					"permission:button:add",
+					"permission:button:update",
+					"permission:button:delete",
+				],
+			},
+		},
+		{
 			path: "/system/menu",
 			handle: {
 				icon: "MenuOutlined",

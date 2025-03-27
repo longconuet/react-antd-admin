@@ -25,7 +25,7 @@ export function fetchUpdatePositionItem(data: Omit<PositionItemType, "code">) {
 }
 
 /* Delete position */
-export function fetchDeletePositionItem(id: number) {
+export function fetchDeletePositionItem(id: string) {
 	return request.delete(`position/${id}`, { ignoreLoading: true }).json();
 }
 

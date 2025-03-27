@@ -1,4 +1,4 @@
-import type { DepartmentItemType } from "./types";
+import type { DepartmentItemType, SimpleDepartmentItemType } from "./types";
 import { request } from "#src/utils";
 
 export * from "./types";
@@ -9,9 +9,14 @@ interface DepartmentQueryParams {
 	pageSize?: number
 }
 
-/* Get the department list */
+/* Get the department list with pagination */
 export function fetchDepartmentList(data: any) {
 	return request.get<PaginatedResponse<DepartmentItemType>>("department", { searchParams: data, ignoreLoading: true }).json();
+}
+
+/* Get the simple department list */
+export function fetchSimpleDepartmentList() {
+	return request.get<SimpleDepartmentItemType[]>("department/simple-list", { ignoreLoading: true }).json();
 }
 
 /* New department */
@@ -25,7 +30,7 @@ export function fetchUpdateDepartmentItem(data: Omit<DepartmentItemType, "code">
 }
 
 /* Delete department */
-export function fetchDeleteDepartmentItem(id: number) {
+export function fetchDeleteDepartmentItem(id: string) {
 	return request.delete(`department/${id}`, { ignoreLoading: true }).json();
 }
 

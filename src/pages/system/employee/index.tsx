@@ -1,6 +1,6 @@
-import type { DepartmentItemType } from "#src/api/system";
+import type { EmployeeItemType } from "#src/api/system";
 import type { ActionType, ProColumns, ProCoreActionType } from "@ant-design/pro-components";
-import { fetchDeleteDepartmentItem, fetchDepartmentList } from "#src/api/system";
+import { fetchDeleteEmployeeItem, fetchEmployeeList, fetchSimpleDepartmentList } from "#src/api/system";
 import { BasicButton, BasicContent, BasicTable } from "#src/components";
 import { useAuth } from "#src/hooks";
 
@@ -13,26 +13,40 @@ import { useTranslation } from "react-i18next";
 import { Detail } from "./components/detail";
 import { getConstantColumns } from "./constants";
 
-export default function Department() {
+export default function Employee() {
 	const { t } = useTranslation();
 	const hasAuth = useAuth();
-	const deleteDepartmentItemMutation = useMutation({
-		mutationFn: (id: string) => fetchDeleteDepartmentItem(id),
+
+	const { data: departmentItems } = useQuery({
+		queryKey: ["employee-department-list"],
+		queryFn: async () => {
+			const responseData = await fetchSimpleDepartmentList();
+			return responseData?.map(item => ({
+				...item,
+				title: item.name,
+				key: item.id,
+			}));
+		},
+		initialData: [],
+	});
+
+	const deleteEmployeeItemMutation = useMutation({
+		mutationFn: (id: string) => fetchDeleteEmployeeItem(id),
 	});
 	/* Detail Data */
 	const [isOpen, setIsOpen] = useState(false);
 	const [title, setTitle] = useState("");
-	const [detailData, setDetailData] = useState<Partial<DepartmentItemType>>({});
+	const [detailData, setDetailData] = useState<Partial<EmployeeItemType>>({});
 
 	const actionRef = useRef<ActionType>(null);
 
 	const handleDeleteRow = async (id: string, action?: ProCoreActionType<object>) => {
-		await deleteDepartmentItemMutation.mutateAsync(id);
+		await deleteEmployeeItemMutation.mutateAsync(id);
 		await action?.reload?.();
 		window.$message?.success(`${t("common.deleteSuccess")}`);
 	};
 
-	const columns: ProColumns<DepartmentItemType>[] = [
+	const columns: ProColumns<EmployeeItemType>[] = [
 		...getConstantColumns(t),
 		{
 			title: t("common.action"),
@@ -49,7 +63,7 @@ export default function Department() {
 						// disabled={!hasAuth("update")}
 						onClick={async () => {
 							setIsOpen(true);
-							setTitle(t("system.department.editDepartment"));
+							setTitle(t("system.employee.editEmployee"));
 							setDetailData(record);
 						}}
 					>
@@ -84,12 +98,12 @@ export default function Department() {
 	};
 	return (
 		<BasicContent className="h-full">
-			<BasicTable<DepartmentItemType>
+			<BasicTable<EmployeeItemType>
 				columns={columns}
 				actionRef={actionRef}
 				request={async (params) => {
 					// console.log(sort, filter);
-					const responseData = await fetchDepartmentList({
+					const responseData = await fetchEmployeeList({
 						pageNumber: params.current,
 						pageSize: params.pageSize,
 						searchName: params.name || "",
@@ -101,16 +115,16 @@ export default function Department() {
 						total: responseData.totalCount,
 					};
 				}}
-				headerTitle={`${t("common.menu.department")}`}
+				headerTitle={`${t("common.menu.employee")}`}
 				toolBarRender={() => [
 					<Button
-						key="add-department"
+						key="add-employee"
 						icon={<PlusCircleOutlined />}
 						type="primary"
 						disabled={!hasAuth("add")}
 						onClick={() => {
 							setIsOpen(true);
-							setTitle(t("system.department.addDepartment"));
+							setTitle(t("system.employee.addEmployee"));
 						}}
 					>
 						{t("common.add")}
@@ -122,6 +136,7 @@ export default function Department() {
 				open={isOpen}
 				onCloseChange={onCloseChange}
 				detailData={detailData}
+				departmentItems={departmentItems}
 				refreshTable={refreshTable}
 			/>
 		</BasicContent>
