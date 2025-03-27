@@ -94,11 +94,15 @@ export function Detail({ title, open, onCloseChange, detailData, refreshTable }:
 					{
 						required: true,
 					},
+					{
+						max: 100,
+						message: t("validation.maxLength", { length: 100 }),
+					}
 				]}
 				width="md"
 				name="name"
 				label={t("system.department.name")}
-				tooltip={t("form.length", { length: 50 })}
+				tooltip={t("form.length", { length: 100 })}
 			/>
 
 			<ProFormText
@@ -107,11 +111,16 @@ export function Detail({ title, open, onCloseChange, detailData, refreshTable }:
 					{
 						required: true,
 					},
+					{
+						max: 50,
+						message: t("validation.maxLength", { length: 50 }),
+					}
 				]}
 				width="md"
 				name="code"
 				disabled={!!detailData.id}
 				label={t("system.department.code")}
+				tooltip={t("form.length", { length: 50 })}
 			/>
 
 			<ProFormText
@@ -120,6 +129,10 @@ export function Detail({ title, open, onCloseChange, detailData, refreshTable }:
 					{
 						required: false,
 					},
+					{
+						max: 500,
+						message: t("validation.maxLength", { length: 500 }),
+					}
 				]}
 				width="md"
 				name="description"
